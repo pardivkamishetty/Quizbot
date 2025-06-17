@@ -6,9 +6,10 @@ const { v4: uuidv4 } = require('uuid');
 const app = express();
 app.use(cors());
 app.use(express.json());
+require('dotenv').config();
 
 // MongoDB Atlas connection
-mongoose.connect('mongodb+srv://kushalbharadwaj68:6Gsmdhixkk2w7Qbl@cluster0.hhwxk.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0').then(() => console.log('Connected to MongoDB Atlas')).catch(err => console.error('MongoDB connection error:', err));
+mongoose.connect(process.env.MONGODB_URI).then(() => console.log('Connected to MongoDB Atlas')).catch(err => console.error('MongoDB connection error:', err));
 
 // MongoDB Schemas
 const quizSchema = new mongoose.Schema({
