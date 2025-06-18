@@ -470,15 +470,18 @@ require('dotenv').config();
 const app = express();
 
 // Enhanced CORS configuration for deployment
+// Fix the allowed origins array in server.js
 const allowedOrigins = [
-  'https://quizbot-a2pg.vercel.app/', // Add your frontend URL when deployed
-  'https://quizbot-zxrm.onrender.com/api', // Add alternative frontend URL
+  'https://quizbot-a2pg.vercel.app', // Remove trailing slash
+  'https://quizbot-frontend-a2pg.vercel.app', // Add this if it's your actual domain
+  'https://quizbot-zxrm.onrender.com', // Remove /api
   'http://localhost:3000',
   'http://localhost:5173'
 ];
 
 const corsOptions = {
   origin: function (origin, callback) {
+    console.log('Request origin:', origin);
     if (!origin || allowedOrigins.indexOf(origin) !== -1) {
       callback(null, true);
     } else {
