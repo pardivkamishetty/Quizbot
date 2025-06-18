@@ -469,12 +469,29 @@ const json2csv = require('json2csv').parse;
 require('dotenv').config();
 
 const app = express();
+// In server.js
+const cors = require('cors');
+
+const allowedOrigins = [
+  'https://your-frontend-app-name.vercel.app', // Replace with your actual frontend URL
+  'http://localhost:3000',
+  'http://localhost:5173'
+];
+
 const corsOptions = {
-  origin: ['http://localhost:3000', 'http://localhost:5173'], // Add your frontend URLs
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   credentials: true,
   optionsSuccessStatus: 204
 };
+
+app.use(cors(corsOptions));
 
 app.use(cors(corsOptions));
 app.use(express.json());
@@ -490,9 +507,16 @@ console.log('Upstash Redis client initialized');
 const DEFAULT_EXPIRATION = parseInt(process.env.REDIS_TTL || '3600'); // Default TTL in seconds (1 hour)
 
 // MongoDB Atlas connection
-mongoose.connect(process.env.MONGODB_URI)
-  .then(() => console.log('Connected to MongoDB Atlas'))
-  .catch(err => console.error('MongoDB connection error:', err));
+mongoose.connect(process.env.MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  serverSelectionTimeoutMS: 5000,
+  // Needed for serverless environments
+  bufferCommands: false,
+  maxPoolSize: 10
+})
+.then(() => console.log('Connected to MongoDB Atlas'))
+.catch(err => console.error('MongoDB connection error:', err));
 
 // MongoDB Schemas
 const quizSchema = new mongoose.Schema({
