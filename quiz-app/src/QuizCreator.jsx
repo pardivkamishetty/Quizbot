@@ -221,7 +221,7 @@ function QuizCreator({ onCreateQuiz }) {
         // Fetch question bank items
         const fetchQuestionBank = async () => {
             try {
-                const response = await fetch('${API_BASE_URL}/question-bank');
+                const response = await fetch(`${API_BASE_URL}/question-bank`);
                 if (response.ok) {
                     const data = await response.json();
                     setQuestionBankItems(data);
@@ -296,7 +296,7 @@ function QuizCreator({ onCreateQuiz }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch(`${API_BASE_URL}/quiz-categories`,
+            const response = await fetch(`${API_BASE_URL}/quizzes`,
              {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },

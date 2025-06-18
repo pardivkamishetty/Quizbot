@@ -33,7 +33,7 @@ function QuizResults() {
                 const data = await res.json();
                 setResults(data);
                
-                const analyticsRes = await fetch(`${API_BASE_URL}/api/quizzes/${quizId}/analytics`);
+                const analyticsRes = await fetch(`${API_BASE_URL}/quizzes/${quizId}/analytics`);
                 if (!analyticsRes.ok) throw new Error('Failed to fetch analytics');
                 const analyticsData = await analyticsRes.json();
                 setAnalytics({
@@ -54,11 +54,11 @@ function QuizResults() {
     }, [quizId, sessionId]);
 
     const handleExportCSV = () => {
-        window.open(`http://localhost:5000/api/quizzes/${quizId}/results/${sessionId}/export/csv`, '_blank');
+        window.open(`${API_BASE_URL}/quizzes/${quizId}/results/${sessionId}/export/csv`, '_blank');
     };
     
     const handleExportPDF = () => {
-        window.open(`http://localhost:5000/api/quizzes/${quizId}/results/${sessionId}/export/pdf`, '_blank');
+        window.open(`${API_BASE_URL}/quizzes/${quizId}/results/${sessionId}/export/pdf`, '_blank');
     };
 
     // For social sharing
