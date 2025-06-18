@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { useParams } from 'react-router-dom';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ArcElement, PointElement, LineElement } from 'chart.js';
 import { Bar, Doughnut, Line } from 'react-chartjs-2';
+import { API_BASE_URL } from './App';
 
 // Register Chart.js components
 ChartJS.register(
@@ -27,7 +28,7 @@ function QuizResults() {
     useEffect(() => {
         const fetchResults = async () => {
             try {
-                const res = await fetch(`http://localhost:5000/api/quizzes/${quizId}/results/${sessionId}`);
+                const res = await fetch(`${API_BASE_URL}/quizzes/${quizId}/results/${sessionId}`);
                 if (!res.ok) throw new Error('Failed to fetch results');
                 const data = await res.json();
                 setResults(data);

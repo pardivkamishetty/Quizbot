@@ -201,7 +201,7 @@ function QuizTaker({ onComplete }) {
             console.log(`Starting quiz with ID: ${id}`);
             
             
-            const response = await fetch(`${API_BASE_URL}/api/quizzes/${id}/start`, {
+            const response = await fetch(`${API_BASE_URL}/quizzes/${id}/start`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -289,7 +289,7 @@ function QuizTaker({ onComplete }) {
         }
         
         try {
-            const response = await fetch(`http://localhost:5000/api/quizzes/${id}/submit`, {
+            const response = await fetch(`${API_BASE_URL}/quizzes/${id}/submit`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ session_id: sessionId, answers })

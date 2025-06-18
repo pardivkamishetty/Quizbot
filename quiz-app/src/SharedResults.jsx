@@ -13,7 +13,7 @@ function SharedResults() {
         const fetchSharedResult = async () => {
             try {
                 setLoading(true);
-                const response = await fetch(`${API_BASE_URL}/api/quizzes/${quizId}/shared-results/${sessionId}`);
+                const response = await fetch(`${API_BASE_URL}/quizzes/${quizId}/shared-results/${sessionId}`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch shared results');
                 }

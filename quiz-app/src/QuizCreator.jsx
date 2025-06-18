@@ -208,7 +208,7 @@ function QuizCreator({ onCreateQuiz }) {
         // Fetch available categories
         const fetchCategories = async () => {
             try {
-                const response = await fetch('http://localhost:5000/api/quiz-categories');
+                const response = await fetch('${API_BASE_URL}/quiz-categories');
                 if (response.ok) {
                     const data = await response.json();
                     setAvailableCategories(data);
@@ -221,7 +221,7 @@ function QuizCreator({ onCreateQuiz }) {
         // Fetch question bank items
         const fetchQuestionBank = async () => {
             try {
-                const response = await fetch('http://localhost:5000/api/question-bank');
+                const response = await fetch('${API_BASE_URL}/question-bank');
                 if (response.ok) {
                     const data = await response.json();
                     setQuestionBankItems(data);
