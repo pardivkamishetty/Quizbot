@@ -172,6 +172,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useParams } from 'react-router-dom';
+import { API_BASE_URL } from './App';
 
 function QuizTaker({ onComplete }) {
     const { id } = useParams(); // Get the quiz ID from URL params
@@ -199,7 +200,8 @@ function QuizTaker({ onComplete }) {
         try {
             console.log(`Starting quiz with ID: ${id}`);
             
-            const response = await fetch(`http://localhost:5000/api/quizzes/${id}/start`, {
+            
+            const response = await fetch(`${API_BASE_URL}/api/quizzes/${id}/start`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

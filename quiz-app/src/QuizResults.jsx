@@ -31,8 +31,8 @@ function QuizResults() {
                 if (!res.ok) throw new Error('Failed to fetch results');
                 const data = await res.json();
                 setResults(data);
-
-                const analyticsRes = await fetch(`http://localhost:5000/api/quizzes/${quizId}/analytics`);
+               
+                const analyticsRes = await fetch(`${API_BASE_URL}/api/quizzes/${quizId}/analytics`);
                 if (!analyticsRes.ok) throw new Error('Failed to fetch analytics');
                 const analyticsData = await analyticsRes.json();
                 setAnalytics({

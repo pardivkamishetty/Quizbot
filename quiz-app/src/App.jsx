@@ -221,6 +221,9 @@ import QuizResults from './QuizResults';
 import QuestionBank from './QuestionBank';
 import SharedResults from './SharedResults';
 
+// Get API URL from environment variable or use default for local development
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+
 // Wrapper component for navigation
 function AppContent() {
     const navigate = useNavigate();
@@ -237,7 +240,7 @@ function AppContent() {
 
     const fetchQuizzes = async () => {
         try {
-            let url = 'http://localhost:5000/api/quizzes';
+            let url = `${API_BASE_URL}/quizzes`;
             const params = new URLSearchParams();
             
             if (filters.category) params.append('category', filters.category);
@@ -362,4 +365,6 @@ function App() {
     );
 }
 
+// Export the API_BASE_URL so other components can use it
+export { API_BASE_URL };
 export default App;

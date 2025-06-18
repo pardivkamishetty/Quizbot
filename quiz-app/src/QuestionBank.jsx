@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { API_BASE_URL } from './App';
 
 function QuestionBank({ onAddToQuiz }) {
     const [questions, setQuestions] = useState([]);
@@ -32,7 +33,7 @@ function QuestionBank({ onAddToQuiz }) {
     const fetchQuestions = async () => {
         setIsLoading(true);
         try {
-            let url = 'http://localhost:5000/api/question-bank';
+            let url = `${API_BASE_URL}/question-bank`;
             const params = new URLSearchParams();
             
             if (filters.category) params.append('category', filters.category);
@@ -57,7 +58,7 @@ function QuestionBank({ onAddToQuiz }) {
 
     const fetchCategories = async () => {
         try {
-            const response = await fetch('http://localhost:5000/api/quiz-categories');
+            const response = await fetch(`${API_BASE_URL}/quiz-categories`);
             if (response.ok) {
                 const data = await response.json();
                 setCategories(data);
@@ -70,7 +71,7 @@ function QuestionBank({ onAddToQuiz }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch('http://localhost:5000/api/question-bank', {
+            const response = await fetch(`${API_BASE_URL}/question-bank`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ ...newQuestion, created_by: 'user' })
@@ -128,7 +129,7 @@ function QuestionBank({ onAddToQuiz }) {
         if (!confirm('Are you sure you want to delete this question?')) return;
         
         try {
-            const response = await fetch(`http://localhost:5000/api/question-bank/${id}`, {
+            const response = await fetch(`${API_BASE_URL}/question-bank/${id}`, {
                 method: 'DELETE',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ created_by: 'user' })

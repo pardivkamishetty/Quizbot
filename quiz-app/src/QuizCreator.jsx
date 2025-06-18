@@ -188,6 +188,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { API_BASE_URL } from './App'; // Adjust the import based on your project structure
 
 function QuizCreator({ onCreateQuiz }) {
     const [quiz, setQuiz] = useState({
@@ -295,7 +296,8 @@ function QuizCreator({ onCreateQuiz }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch('http://localhost:5000/api/quizzes', {
+            const response = await fetch(`${API_BASE_URL}/quiz-categories`,
+             {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ ...quiz, created_by: 'user' })

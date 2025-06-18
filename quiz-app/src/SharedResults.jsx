@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useParams } from 'react-router-dom';
+import { API_BASE_URL } from './App';
 
 function SharedResults() {
     const { quizId, sessionId } = useParams();
@@ -12,7 +13,7 @@ function SharedResults() {
         const fetchSharedResult = async () => {
             try {
                 setLoading(true);
-                const response = await fetch(`http://localhost:5000/api/quizzes/${quizId}/shared-results/${sessionId}`);
+                const response = await fetch(`${API_BASE_URL}/api/quizzes/${quizId}/shared-results/${sessionId}`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch shared results');
                 }
