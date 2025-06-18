@@ -471,8 +471,8 @@ const app = express();
 
 // Enhanced CORS configuration for deployment
 const allowedOrigins = [
-  'https://quizbot-frontend.vercel.app', // Add your frontend URL when deployed
-  'https://quizbot-frontend.onrender.com', // Add alternative frontend URL
+  'https://quizbot-a2pg.vercel.app/', // Add your frontend URL when deployed
+  'https://quizbot-zxrm.onrender.com/api', // Add alternative frontend URL
   'http://localhost:3000',
   'http://localhost:5173'
 ];
